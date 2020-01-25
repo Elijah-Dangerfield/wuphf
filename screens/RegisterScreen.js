@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SmallFormEntry from "../components/SmallFormEntry";
 import AppButton from "../components/AppButton";
 import { ScrollView } from "react-native";
+import * as firebase from "firebase"
 
 const RegisterScreen = props => {
   const [info, setInfo] = useState({
@@ -54,6 +55,7 @@ const RegisterScreen = props => {
             backgroundColor="#FC6C00"
             onPress={() => {
               console.log(info);
+              firebase.auth().createUserWithEmailAndPassword(info.email, info.password)
               // props.navigation.push("Message");
             }}
           />
