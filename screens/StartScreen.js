@@ -2,27 +2,32 @@ import React from "react";
 import styled from "styled-components";
 import wuphf_logo from "../assets/wuphf_logo.png";
 import { NavigationEvents } from "react-navigation";
+import AppButton from "../components/AppButton";
 
 const StartScreen = props => {
   const navigate = () => {
     props.navigation.push("Login");
   };
-
-  const getNavigationButton = (title, textColor, buttonColor, destination) => (
-    <GameButton
-      onPress={() => props.navigation.push(destination)}
-      style={{ backgroundColor: buttonColor }}
-    >
-      <GameButtonText style={{ color: textColor }}>{title}</GameButtonText>
-    </GameButton>
-  );
-
   return (
     <Container>
       <Logo source={wuphf_logo}></Logo>
       <ButtonsWrapper>
-        {getNavigationButton("Log In", "white", "#FC6C00", "Login")}
-        {getNavigationButton("Sign Up", "white", "#584798", "Register")}
+        <AppButton
+          title="Log In"
+          textColor="white"
+          backgroundColor="#FC6C00"
+          onPress={() => {
+            props.navigation.push("Login");
+          }}
+        />
+        <AppButton
+          title="Sign Up"
+          textColor="white"
+          backgroundColor="#584798"
+          onPress={() => {
+            props.navigation.push("Register");
+          }}
+        />
       </ButtonsWrapper>
     </Container>
   );
@@ -50,20 +55,4 @@ const Container = styled.View`
   background: white;
   position: relative;
   align-items: center;
-`;
-
-const GameButton = styled.TouchableOpacity`
-  height: 45%;
-  width: 80%;
-  margin: 0 auto;
-  background: grey;
-  align-items: center;
-  justify-content: center;
-  border-radius: 45px;
-  box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
-`;
-
-const GameButtonText = styled.Text`
-  font-weight: 600;
-  font-size: 20px;
 `;
