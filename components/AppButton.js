@@ -2,18 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 const AppButton = props => (
-  <GameButton
+  <Button
     onPress={() => props.onPress()}
     style={{ backgroundColor: props.backgroundColor }}
   >
-    <GameButtonText style={{ color: props.textColor }}>
-      {props.title}
-    </GameButtonText>
-  </GameButton>
+    <ButtonText style={{ color: props.textColor }}>{props.title}</ButtonText>
+  </Button>
 );
 
 export default AppButton;
-const GameButton = styled.TouchableOpacity`
+const Button = styled.TouchableOpacity`
   height: 45%;
   width: 80%;
   margin: 0 auto;
@@ -24,7 +22,7 @@ const GameButton = styled.TouchableOpacity`
   box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
 `;
 
-const GameButtonText = styled.Text`
+const ButtonText = styled.Text`
   font-weight: 600;
   font-size: 20px;
 `;
