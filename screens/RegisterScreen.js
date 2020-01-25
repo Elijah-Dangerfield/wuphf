@@ -2,11 +2,40 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SmallFormEntry from "../components/SmallFormEntry";
 import AppButton from "../components/AppButton";
-import { ScrollView } from "react-native";
+import { ScrollView, Alert } from "react-native";
+import * as firebase from "firebase"
+
+export function build_alert(title, msg){
+  backgroundColor="#FFFFFF"
+  Alert.alert(
+    title,
+    msg,
+    [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ],
+    {cancelable: false},
+  );
+}
+
+export function check_if_valid(email = ""){
+  if(email == ""){
+    return false;
+  }else if(email.search("@") == null){
+    return false;
+  }else{
+    return true;
+  }
+}
 
 const RegisterScreen = props => {
   const [info, setInfo] = useState({
     email: "",
+    username: "",
     phone: "",
     password: "",
     confirmPassword: ""
@@ -32,6 +61,14 @@ const RegisterScreen = props => {
           }}
         />
         <SmallFormEntry
+          hint="Enter a username"
+          title="username"
+          password={false}
+          onChangeText={text => {
+            setInfo({...info, username: text });
+          }}
+        />
+        <SmallFormEntry
           hint="Enter a password"
           title="Password"
           password={true}
@@ -53,8 +90,26 @@ const RegisterScreen = props => {
             textColor="white"
             backgroundColor="#FC6C00"
             onPress={() => {
-              console.log(info);
-              // props.navigation.push("Message");
+              if(check_if_valid(info.email)){
+                if(info.confirmPassword != info.password || info.password === "" || info.password.length < 6){
+                  build_alert("Password Error", "Fill out passwords and make sure they match and are at least 6 characters long!")
+                }else if(info.username === "" || info.email === "" || info.phone === ""){
+                  build_alert("Field Error", "Make sure all fields are filled properly!")
+                }else{
+                  console.log(info);
+                  firebase.auth().createUserWithEmailAndPassword(info.email, info.password)
+                    .catch(err => {
+                      console.log('ERR =>', err)
+                      build_alert("Register Error", "This email is already in use!")
+                    })
+                    .finally(() => {
+                      props.navigation.push("Message");
+                    })
+                }
+                // props.navigation.push("Message");
+              }else{
+                build_alert("Email Error", "Email not properly formatted!")
+              }
             }}
           />
         </ButtonWrapper>
