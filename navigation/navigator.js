@@ -7,9 +7,12 @@ import MessageScreen from "../screens/MessageScreen";
 
 const MainNavigator = createStackNavigator({
   Start: { screen: StartScreen, navigationOptions: { headerShown: false } },
-  Login: { screen: LoginScreen },
-  Register: { screen: RegisterScreen },
-  Message: { screen: MessageScreen }
+  Login: { screen: LoginScreen, navigationOptions: { headerShown: false } },
+  Register: {
+    screen: RegisterScreen,
+    navigationOptions: { headerShown: false }
+  },
+  Message: { screen: MessageScreen, navigationOptions: { headerShown: false } }
 });
 
 const App = createAppContainer(MainNavigator);
