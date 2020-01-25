@@ -34,7 +34,7 @@ const LoginScreen = props => {
           onPress={() => {
             console.log(username);
             console.log(password);
-            // props.navigation.push("Message");
+            props.navigation.push("Message");
           }}
         />
       </ButtonWrapper>
