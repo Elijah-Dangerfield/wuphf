@@ -3,11 +3,33 @@ import styled from "styled-components";
 import wuphf_logo from "../assets/wuphf_logo.png";
 import { NavigationEvents } from "react-navigation";
 import AppButton from "../components/AppButton";
+import {Permissions, Notifications} from 'expo'
 
 const StartScreen = props => {
   const navigate = () => {
     props.navigation.push("Login");
   };
+  useEffect(() => {
+    enablePushNotifications();
+  }, []);
+  const enablePushNotifications = async () =>{
+    // Determine if permission already granted
+    const{status} = await Permissions.getAsync(Permissions.Notifications);
+    let finalStatus = status;
+
+    // Ask for permission if not granted
+    if(status !== 'granted'){
+      const{status} = await Permissions.askAsync(Permissions.Notifications);
+      finalStatus = status;
+    }
+
+    // Do nothing if permission rejected
+    if(finalStatus !== 'granted'){return;}
+
+    // Grab User Push Notification Token
+    let userToken = await Notifications.getExpoPushTokenAsync();
+    console.log(userToken);
+  }
   return (
     <Container>
       <Logo source={wuphf_logo}></Logo>
