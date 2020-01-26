@@ -3,7 +3,8 @@ import styled from "styled-components";
 import SmallFormEntry from "../components/SmallFormEntry";
 import AppButton from "../components/AppButton";
 import * as firebase from "firebase";
-import { ScrollView, Alert } from "react-native";
+import { Alert } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export function build_alert(title, msg) {
   Alert.alert(
@@ -26,7 +27,11 @@ const LoginScreen = props => {
   const [password, setPassword] = useState("");
   var loginFail = false;
   return (
-    <ScrollView>
+    <KeyboardAwareScrollView 
+      style={{ flex: 1 }}
+      enableOnAndroid={true}
+      enableAutomaticScroll={(Platform.OS === 'ios')}
+    >
       <Container>
         <Title>Log In</Title>
         <SmallFormEntry
@@ -70,7 +75,7 @@ const LoginScreen = props => {
           />
         </ButtonWrapper>
       </Container>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 };
 
