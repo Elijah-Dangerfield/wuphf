@@ -40,6 +40,8 @@ const RegisterScreen = props => {
     password: "",
     confirmPassword: ""
   });
+  var regFail = false
+
   return (
     <ScrollView>
       <Container>
@@ -101,9 +103,10 @@ const RegisterScreen = props => {
                     .catch(err => {
                       console.log('ERR =>', err)
                       build_alert("Register Error", "This email is already in use!")
+                      regFail = true
                     })
                     .finally(() => {
-                      props.navigation.push("Message");
+                      if(!regFail){props.navigation.push("Message");}
                     })
                 }
                 // props.navigation.push("Message");
