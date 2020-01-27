@@ -4,11 +4,11 @@
 This is a react native project for HackMT written in typescript. 
 
 ### What youll need to get started
-1. (npm)[https://www.npmjs.com/get-npm] and or yarn : 
+1. [npm](https://www.npmjs.com/get-npm) and or yarn : 
 These are package managers to make it easy to install dependencies/libraries for our app dev. Node.js and npm come together. You will need Node.js to serve your javascript/typecsript code
 2. Node.js  : Mentioned above, comes with npm
-3. (Expo)[https://expo.io/learn]  : This is a tool to help make react native development easier. 
-4. (VSCode)[https://code.visualstudio.com/] : everyone develops in this. There are extensions below that I SUPER suggest you get to make things easier for you. 
+3. [Expo](https://expo.io/learn)  : This is a tool to help make react native development easier. 
+4. [VSCode](https://code.visualstudio.com/) : everyone develops in this. There are extensions below that I SUPER suggest you get to make things easier for you. 
 5. The expo app. This lets us run the app on your device. 
 
 
